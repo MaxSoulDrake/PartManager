@@ -100,7 +100,7 @@
     </c:if>
     <tr>
         <td colspan="7" class="left-side link right-side">
-            <a style="font-size: 100%" href="<c:url value="/add"/>" title="click to add a new part">
+            <a style="margin-right: 70px; font-size: 100%" href="<c:url value="/add"/>" title="click to add a new part">
                 <span class="icon icon-add"></span>Add new part
             </a>
             <c:if test="${pagesCount > 1}">
@@ -169,7 +169,7 @@
                     &nbsp<span class="icon icon-last"></span>&nbsp
                 </a>
             </c:if>
-            <span style="font-size: 120%"> ${partsCount} matches found</span>
+            <span style="margin-left: 70px; font-size: 120%"> ${partsCount} matches found</span>
         </td>
     </tr>
     <caption class="sign" align="bottom">
