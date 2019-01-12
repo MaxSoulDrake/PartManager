@@ -64,14 +64,15 @@ public class PartController {
             if (!search.isEmpty()) modelAndView.addObject("search", search);
             partService.add(part);
         } else {
-            modelAndView.addObject("message","part with this title already exists");
+            modelAndView.addObject("message","part with title \"" + part.getTitle() + "\" already exists");
             modelAndView.setViewName("redirect:/add");
         }
         return modelAndView;
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView editPage(@PathVariable("id") int id) {
+    public ModelAndView editPage(@PathVariable("id") int id,
+                                 @ModelAttribute("message") String message) {
         Part part = partService.getById(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editPage");
@@ -82,14 +83,14 @@ public class PartController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView editPart(@ModelAttribute("part") Part part) {
         ModelAndView modelAndView = new ModelAndView();
-        if (partService.checkTitle(part.getTitle())) {
+        if (partService.checkTitle(part.getTitle()) || partService.getById(part.getId()).getTitle().equals(part.getTitle())) {
             modelAndView.setViewName("redirect:/");
             modelAndView.addObject("page", page);
             if (required != null) modelAndView.addObject("required", required);
             if (!search.isEmpty()) modelAndView.addObject("search", search);
             partService.edit(part);
         } else {
-            modelAndView.addObject("message","part with this title already exists");
+            modelAndView.addObject("message","part with title \"" + part.getTitle() + "\" already exists");
             modelAndView.setViewName("redirect:/edit/" + part.getId());
         }
         return modelAndView;
